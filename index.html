@@ -3,86 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meet w/ Babe ♡</title>
+    <title>Countdown to Our Day</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #FFF0F5, #FFE4E1);
-            overflow: hidden; /* Hide scrollbars from overflowing hearts */
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden; /* Hide scrollbars */
         }
 
-        /* --- Pulsating Circle Effect --- */
+        .gradient-bg {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .timer-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .timer-box span:first-child {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ec4899;
+        }
+
+        .timer-box span:last-child {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Pulsing Circle Effect --- */
         .pulse-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            z-index: 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .pulse-circle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
             border-radius: 50%;
-            background-color: rgba(255, 182, 193, 0.2);
-            animation: pulse 4s infinite cubic-bezier(0.66, 0, 0, 1);
-            transform-origin: center;
+            animation: pulse 4s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .pulse-circle:nth-child(1) {
+            width: 350px;
+            height: 350px;
+            animation-delay: 0s;
         }
 
         .pulse-circle:nth-child(2) {
-            animation-delay: 1.33s;
+            width: 400px;
+            height: 400px;
+            animation-delay: 1s;
         }
 
         .pulse-circle:nth-child(3) {
-            animation-delay: 2.66s;
+            width: 450px;
+            height: 450px;
+            animation-delay: 2s;
         }
 
         @keyframes pulse {
             0% {
-                transform: scale(0.9);
-                opacity: 0.8;
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
             }
             100% {
-                transform: scale(2.5);
+                transform: scale(1.2);
                 opacity: 0;
             }
         }
         
-        /* --- Floating Hearts Background --- */
-        .heart {
+        #hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden; /* Crucial for containing the elements */
+        }
+        
+        /* --- Floating Elements Background --- */
+        .floating-element {
             position: absolute;
-            font-size: 20px;
-            color: rgba(255, 192, 203, 0.6);
-            animation: floatUp 10s infinite linear;
-            z-index: -1;
+            user-select: none;
+            /* Animation properties are now set in JS */
+            animation-name: floatUp;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
         }
 
         @keyframes floatUp {
             0% {
+                /* Start from its initial position (at the bottom) */
                 transform: translateY(0);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh);
+                /* Move up across the entire screen and fade out */
+                transform: translateY(-110vh); 
                 opacity: 0;
             }
         }
 
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body class="gradient-bg min-h-screen flex items-center justify-center">
 
     <!-- Container for floating hearts -->
-    <div id="hearts-container" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+    <div id="hearts-container"></div>
 
     <main class="relative z-10 text-center text-gray-800 p-4">
         <!-- Couple Picture -->
@@ -90,120 +140,119 @@
 
         <!-- Main Title -->
         <h1 class="text-3xl md:text-4xl font-bold text-pink-500 mb-2 flex items-center justify-center gap-3">
-            <span>♡</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
             <span>Meet w/ Babe</span>
-            <span>♡</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
         </h1>
-        <p id="target-date-display" class="text-pink-400 mb-12"></p>
-        
-        <!-- Pulsating circles will be positioned behind the countdown -->
-        <div class="pulse-container">
-            <div class="pulse-circle"></div>
-            <div class="pulse-circle"></div>
-            <div class="pulse-circle"></div>
-        </div>
+        <p class="text-pink-400 mb-8" id="target-date">September 12, 2025 at 3:00 PM</p>
 
         <!-- Countdown Timer -->
-        <div class="relative grid grid-cols-4 gap-2 md:gap-4 max-w-lg mx-auto mb-10">
-            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                <div id="days" class="text-4xl md:text-6xl font-bold text-pink-600">00</div>
-                <div class="text-sm text-pink-500 uppercase">Days</div>
-            </div>
-            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                <div id="hours" class="text-4xl md:text-6xl font-bold text-pink-600">00</div>
-                <div class="text-sm text-pink-500 uppercase">Hours</div>
-            </div>
-            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                <div id="minutes" class="text-4xl md:text-6xl font-bold text-pink-600">00</div>
-                <div class="text-sm text-pink-500 uppercase">Minutes</div>
-            </div>
-            <div class="bg-white/50 backdrop-blur-sm p-4 rounded-xl shadow-lg">
-                <div id="seconds" class="text-4xl md:text-6xl font-bold text-pink-600">00</div>
-                <div class="text-sm text-pink-500 uppercase">Seconds</div>
+        <div class="pulse-container mb-8">
+            <div class="pulse-circle"></div>
+            <div class="pulse-circle"></div>
+            <div class="pulse-circle"></div>
+            <div id="countdown" class="flex justify-center items-center gap-3 md:gap-5">
+                <div class="timer-box flex flex-col items-center">
+                    <span id="days">00</span>
+                    <span>Days</span>
+                </div>
+                <div class="timer-box flex flex-col items-center">
+                    <span id="hours">00</span>
+                    <span>Hours</span>
+                </div>
+                <div class="timer-box flex flex-col items-center">
+                    <span id="minutes">00</span>
+                    <span>Minutes</span>
+                </div>
+                <div class="timer-box flex flex-col items-center">
+                    <span id="seconds">00</span>
+                    <span>Seconds</span>
+                </div>
             </div>
         </div>
 
         <!-- Message Box -->
-        <div class="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-xl inline-block">
-            <p class="text-lg font-bold text-pink-600">Can't wait to see you! ♥︎</p>
-            <p class="text-sm text-pink-500 mt-1">Every second brings us closer together</p>
+        <div class="timer-box inline-block">
+            <p class="font-semibold text-pink-500 text-lg">Can't wait to see you! 💕</p>
+            <p class="text-sm text-gray-500">Every second brings us closer together</p>
         </div>
 
     </main>
 
     <script>
-        // --- Countdown Logic ---
-        // Clear any existing interval to prevent duplicates when the script is re-run in some environments
-        if (window.countdownTimer) {
-            clearInterval(window.countdownTimer);
+        // --- Countdown Timer Logic ---
+        // Set the date we're counting down to (in Thailand's timezone, UTC+7)
+        // Note: Months are 0-indexed, so 8 is September.
+        const countDownDate = new Date(Date.UTC(2025, 8, 12, 15 - 7, 0, 0)).getTime();
+
+        // Use a variable for the interval to clear it if needed
+        let countdownInterval;
+
+        function startCountdown() {
+            // Clear any existing interval to prevent multiple timers running
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+
+            countdownInterval = setInterval(function() {
+                // Get today's date and time
+                const now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                const distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the elements
+                document.getElementById("days").innerText = String(days).padStart(2, '0');
+                document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+                document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = "<div class='text-2xl font-bold text-pink-500'>The wait is over! 💕</div>";
+                }
+            }, 1000);
         }
 
-        // Set the date we're counting down to (September 12, 2025, 3:00 PM Thai Time UTC+7)
-        const countDownDate = new Date("2025-09-12T15:00:00+07:00").getTime();
+        startCountdown();
 
-        // Display the target date nicely formatted
-        const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric', 
-            hour: 'numeric', 
-            minute: 'numeric', 
-            hour12: true,
-            timeZone: 'Asia/Bangkok'
-        };
-        document.getElementById('target-date-display').innerText = new Date(countDownDate).toLocaleString('en-US', options).replace(',', ' at') + " (Thai Time)";
-
-
-        // Update the count down every 1 second
-        window.countdownTimer = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Helper to add leading zeros
-            const formatTime = (time) => time < 10 ? `0${time}` : time;
-
-            // Display the result in the elements
-            document.getElementById("days").innerText = formatTime(days);
-            document.getElementById("hours").innerText = formatTime(hours);
-            document.getElementById("minutes").innerText = formatTime(minutes);
-            document.getElementById("seconds").innerText = formatTime(seconds);
-
-            // If the count down is finished, write some text
-            if (distance < 0) {
-                clearInterval(window.countdownTimer);
-                 document.querySelector(".grid").innerHTML = `<div class="col-span-4 text-2xl font-bold text-pink-600 p-8 bg-white/50 rounded-lg">We're together now! ❤️</div>`;
-            }
-        }, 1000);
-        
-        // --- Floating Hearts Logic ---
+        // --- Floating Elements Logic ---
         const heartsContainer = document.getElementById('hearts-container');
-        const heartsToCreate = 20;
+        const elements = ['♡', '⭐', '🎁', '✨', '💖', '🥰', '💌', '💝', '🎉', '💐', '🧸'];
+        const colors = ['rgba(255, 192, 203, 0.8)', 'rgba(250, 177, 216, 0.8)', 'rgba(255, 235, 156, 0.8)', 'rgba(255, 105, 180, 0.8)'];
+        const elementsToCreate = 40;
 
-        // Clear existing hearts before adding new ones to prevent accumulation on script re-run
         heartsContainer.innerHTML = ''; 
-        for (let i = 0; i < heartsToCreate; i++) {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '♡';
+        for (let i = 0; i < elementsToCreate; i++) {
+            const el = document.createElement('div');
+            el.classList.add('floating-element');
             
-            // Randomize properties for a natural look
-            heart.style.left = `${Math.random() * 100}vw`;
-            heart.style.animationDuration = `${Math.random() * 5 + 5}s`; // Duration between 5s and 10s
-            heart.style.animationDelay = `${Math.random() * 5}s`;
-            heart.style.fontSize = `${Math.random() * 10 + 10}px`; // Size between 10px and 20px
+            el.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+            el.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Set starting horizontal position randomly across the screen
+            el.style.left = `${Math.random() * 100}vw`;
+            
+            // Set starting vertical position just below the screen
+            el.style.top = `calc(100vh + ${Math.random() * 100}px)`; 
+            
+            // Randomize animation properties for a natural, staggered effect
+            el.style.animationDuration = `${Math.random() * 10 + 8}s`; // Duration between 8s and 18s
+            el.style.animationDelay = `${Math.random() * 10}s`;
+            el.style.fontSize = `${Math.random() * 15 + 10}px`; // Size between 10px and 25px
 
-            heartsContainer.appendChild(heart);
+            heartsContainer.appendChild(el);
         }
 
     </script>
 
 </body>
 </html>
-
 
